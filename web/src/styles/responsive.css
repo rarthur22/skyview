@@ -1,0 +1,87 @@
+/* Responsive: squeeze / hide sidebars on small screens. */
+
+@media (max-width: 1100px) {
+  .sidebar-left {
+    width: 300px !important;
+  }
+  .sidebar-right {
+    width: 300px !important;
+  }
+}
+
+/* The dock buttons work on desktop too, not only on mobile. */
+@media (min-width: 861px) {
+  .sidebar-left,
+  .sidebar-right {
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .sidebar-left:not(.open) {
+    transform: translateX(calc(-100% - 1rem));
+    opacity: 0;
+    pointer-events: none;
+  }
+  .sidebar-right:not(.open) {
+    transform: translateX(calc(100% + 1rem));
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .radar-overlay {
+    inset: 4rem 1rem 4rem 1rem;
+  }
+  .radar-scope {
+    width: min(80vw, 70vh);
+  }
+  /* Sidebars slide off; toggle from the top bar. */
+  .sidebar-left,
+  .sidebar-right {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 60;
+    width: min(78vw, 320px) !important;
+    transition: transform 0.25s ease;
+    background: rgba(10, 14, 39, 0.96);
+    backdrop-filter: blur(16px);
+  }
+  .sidebar-left {
+    left: 0;
+    transform: translateX(-100%);
+    border-right: 1px solid var(--hud-fg-secondary);
+  }
+  .sidebar-right {
+    right: 0;
+    transform: translateX(100%);
+    border-left: 1px solid var(--hud-fg-secondary);
+  }
+  .sidebar-left.open {
+    transform: translateX(0);
+  }
+  .sidebar-right.open {
+    transform: translateX(0);
+  }
+
+  .status-bar {
+    font-size: 9px !important;
+    gap: 8px !important;
+  }
+  .status-bar .hide-mobile {
+    display: none !important;
+  }
+
+  .hud-header-title {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hud-header-title {
+    font-size: 16px !important;
+  }
+  .hud-header .hud-btn {
+    padding: 4px 6px !important;
+    font-size: 9px !important;
+  }
+}

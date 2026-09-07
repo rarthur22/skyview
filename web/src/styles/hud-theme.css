@@ -1,0 +1,430 @@
+/* Cockpit HUD theme: sliders, scrollbars, reticle, status dots, compass. */
+
+.hud-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 212, 255, 0.3);
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hud-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--hud-fg-primary);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 8px var(--hud-glow);
+  cursor: pointer;
+}
+
+.hud-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--hud-fg-primary);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 8px var(--hud-glow);
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+}
+
+/* Custom scrollbars for lists/panels. */
+.hud-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.hud-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 212, 255, 0.05);
+}
+.hud-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.3);
+}
+.hud-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 255, 0.6);
+}
+.hud-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 212, 255, 0.4) transparent;
+}
+
+.no-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Reticle (center crosshair). */
+.reticle {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.reticle .r-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--hud-fg-primary);
+  box-shadow: 0 0 6px var(--hud-glow);
+}
+.reticle .tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+.reticle .tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+.reticle .bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+.reticle .br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+.reticle .r-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  transform: translate(-50%, -50%);
+  background: var(--hud-fg-primary);
+  border-radius: 9999px;
+}
+
+/* Status pulse dots. */
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+}
+.dot-ok {
+  background: var(--hud-success);
+  box-shadow: 0 0 6px var(--hud-success);
+}
+.dot-warn {
+  background: var(--hud-warn);
+  box-shadow: 0 0 6px var(--hud-warn);
+}
+.dot-err {
+  background: #ff4d4d;
+  box-shadow: 0 0 6px #ff4d4d;
+}
+.dot-pulse {
+  animation: dot-pulse 1.6s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Input caret blink accent. */
+.caret-cyan {
+  caret-color: var(--hud-fg-primary);
+}
+
+/* Aircraft label (CSS2DObject) glued to each contact. */
+.ac-label-anchor {
+  pointer-events: none;
+  transform: translateY(-9px);
+}
+.ac-label {
+  pointer-events: auto;
+  cursor: pointer;
+  min-width: 64px;
+  padding: 3px 6px;
+  text-align: center;
+  color: var(--hud-fg-primary);
+  font-family: "JetBrains Mono", "OCR A", monospace;
+  background: rgba(10, 14, 39, 0.55);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  transition: border-color 0.15s ease, background 0.15s ease, opacity 0.3s ease;
+}
+.ac-label:hover { background: rgba(0, 212, 255, 0.12); }
+.ac-label.selected {
+  border-color: var(--hud-fg-primary);
+  background: rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 10px var(--hud-glow);
+}
+.ac-label-top {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 6px var(--hud-glow);
+}
+.ac-label-type { font-size: 9px; color: var(--hud-fg-secondary); }
+.ac-label-meta { font-size: 9px; color: var(--hud-fg-primary); white-space: nowrap; }
+
+/* Shift the box down so the leader line meets its bottom edge. */
+
+/* Flight-phase accent (green climbing / orange descending / grey on ground). */
+.ac-label.phase-climb { border-color: rgba(125, 255, 176, 0.5); }
+.ac-label.phase-climb .ac-label-top { color: #7dffb0; }
+.ac-label.phase-climb .ac-label-meta { color: #9fffc8; }
+.ac-label.phase-desc { border-color: rgba(255, 179, 71, 0.5); }
+.ac-label.phase-desc .ac-label-top { color: #ffb347; }
+.ac-label.phase-desc .ac-label-meta { color: #ffd39b; }
+.ac-label.phase-ground { border-color: rgba(154, 164, 181, 0.45); }
+.ac-label.phase-ground .ac-label-top { color: #9aa4b5; }
+.ac-label.alert-warning {
+  border-color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.22);
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+  animation: alert-pulse 1.2s ease-in-out infinite;
+}
+.ac-label.alert-caution {
+  border-color: #ffb347;
+  background: rgba(255, 179, 71, 0.18);
+}
+@keyframes alert-pulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(255, 77, 77, 0.4); }
+  50% { box-shadow: 0 0 16px rgba(255, 77, 77, 0.9); }
+}
+
+
+/* Central tactical scope. It is intentionally subtle so the 3D scene remains
+ * present, but gives the operator an immediate overview of all contacts. */
+.radar-overlay {
+  position: absolute;
+  inset: 4.5rem 22rem 4rem 22rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.radar-overlay::before,
+.radar-overlay::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: min(10vw, 120px);
+  border-top: 1px solid rgba(0, 212, 255, 0.18);
+}
+.radar-overlay::before { right: calc(50% + min(31vh, 26vw, 310px)); }
+.radar-overlay::after { left: calc(50% + min(31vh, 26vw, 310px)); }
+
+.radar-scope {
+  position: relative;
+  width: min(62vh, 52vw, 620px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.06), rgba(10, 14, 39, 0.02) 58%, transparent 72%);
+  box-shadow: 0 0 42px rgba(0, 212, 255, 0.08), inset 0 0 34px rgba(0, 212, 255, 0.06);
+}
+
+.radar-ring,
+.radar-crosshair,
+.radar-sweep {
+  position: absolute;
+  pointer-events: none;
+}
+
+.radar-ring {
+  inset: 0;
+  margin: auto;
+  border: 1px solid rgba(0, 212, 255, 0.16);
+  border-radius: 50%;
+}
+.radar-ring-1 { width: 33.333%; height: 33.333%; }
+.radar-ring-2 { width: 66.666%; height: 66.666%; }
+.radar-ring-3 { width: 100%; height: 100%; }
+
+.radar-crosshair-x { left: 0; right: 0; top: 50%; border-top: 1px solid rgba(0, 212, 255, 0.12); }
+.radar-crosshair-y { top: 0; bottom: 0; left: 50%; border-left: 1px solid rgba(0, 212, 255, 0.12); }
+
+.radar-sweep {
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(0, 212, 255, 0.22), rgba(0, 212, 255, 0.03) 8deg, transparent 22deg);
+  animation: radar-rotate 7s linear infinite;
+}
+@keyframes radar-rotate { to { transform: rotate(360deg); } }
+
+.radar-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--hud-fg-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--hud-glow);
+}
+.radar-center span {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--hud-fg-secondary);
+  font: 8px/1 "JetBrains Mono", monospace;
+  letter-spacing: 0.12em;
+}
+
+.radar-cardinal {
+  position: absolute;
+  color: rgba(0, 212, 255, 0.62);
+  font-size: 10px;
+  font-weight: 700;
+}
+.radar-n { top: 5%; left: 50%; transform: translateX(-50%); }
+.radar-e { top: 50%; right: 5%; transform: translateY(-50%); }
+.radar-s { bottom: 5%; left: 50%; transform: translateX(-50%); }
+.radar-w { top: 50%; left: 5%; transform: translateY(-50%); }
+
+.radar-contact {
+  position: absolute;
+  z-index: 3;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.radar-contact-shape {
+  display: block;
+  width: 0;
+  height: 0;
+  margin: 5px auto;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 13px solid var(--hud-fg-primary);
+  filter: drop-shadow(0 0 5px var(--hud-glow));
+}
+.radar-contact:hover .radar-contact-shape,
+.radar-contact.selected .radar-contact-shape {
+  border-bottom-color: #fff;
+  filter: drop-shadow(0 0 8px #fff);
+}
+.radar-contact-shape.radar-alert {
+  border-bottom-color: #ff4d4d;
+  filter: drop-shadow(0 0 6px rgba(255, 77, 77, 0.9));
+  animation: alert-pulse 1.1s ease-in-out infinite;
+}
+.radar-caption {
+  position: absolute;
+  bottom: -22px;
+  color: var(--hud-fg-secondary);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+.radar-caption span { margin-left: 12px; color: var(--hud-fg-primary); }
+
+/* Section collapse chevron. */
+.hud-collapse {
+  transition: transform 0.15s ease;
+}
+.hud-collapse.open {
+  transform: rotate(90deg);
+}
+
+/* Cockpit ambiance: a soft vignette + faint CRT scanlines on top of the 3D
+ * view. Purely decorative and subtle so it never obscures contacts. */
+.hud-cockpit {
+  background:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 55%, rgba(2, 6, 20, 0.55) 100%),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 212, 255, 0.025) 0px,
+      rgba(0, 212, 255, 0.025) 1px,
+      transparent 2px,
+      transparent 3px
+    );
+  mix-blend-mode: normal;
+}
+
+/* Freshness badge in the flight detail card. */
+.stale-ok { color: var(--hud-success); text-shadow: 0 0 6px var(--hud-success); }
+.stale-warn { color: var(--hud-warn); text-shadow: 0 0 6px var(--hud-warn); }
+.stale-err { color: #ff4d4d; text-shadow: 0 0 6px #ff4d4d; animation: alert-pulse 1.2s ease-in-out infinite; }
+
+/* Aircraft photo: framed like a cockpit screenshot. Framed, gradient-glow
+ * border, inset shadow and a subtle colour grade so it isn't a raw image. */
+.aircraft-photo {
+  background:
+    linear-gradient(180deg, rgba(10, 14, 39, 0.6) 0%, rgba(10, 14, 39, 0.25) 36%, rgba(10, 14, 39, 0.35) 100%);
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.45),
+    inset 0 0 20px rgba(0, 212, 255, 0.06);
+}
+.aircraft-photo-img {
+  display: block;
+  filter: saturate(0.92) contrast(1.06) brightness(0.98);
+}
+/* Soft vignette + horizon fade so the photo blends into the HUD. */
+.aircraft-photo-gradient {
+  background:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 45%, rgba(10, 14, 39, 0.45) 100%),
+    linear-gradient(180deg, rgba(10, 14, 39, 0.18) 0%, rgba(10, 14, 39, 0) 40%, rgba(10, 14, 39, 0.5) 100%);
+}
+.aircraft-photo-tag {
+  color: var(--hud-fg-primary);
+  background: rgba(10, 14, 39, 0.7);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 700;
+  text-shadow: 0 0 4px rgba(0, 212, 255, 0.5);
+}
+.aircraft-photo-tag-dim {
+  color: var(--hud-fg-secondary);
+  border-color: rgba(0, 212, 255, 0.15);
+  font-weight: 500;
+}
+
+/* Observer "YOU" marker label. */
+.you-label {
+  pointer-events: none;
+  color: #00d4ff;
+  font-family: "JetBrains Mono", "OCR A", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
+}
+
+/* Airport waypoint marker on the ground plane. */
+.airport-label {
+  pointer-events: none;
+  color: #ffd166;
+  font-family: "JetBrains Mono", "OCR A", monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 6px rgba(255, 209, 102, 0.8);
+}
+

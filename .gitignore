@@ -1,0 +1,34 @@
+# deps
+node_modules/
+.pnpm-store/
+
+# builds
+dist/
+build/
+
+# data
+server/data/*.json
+server/data/*.local.json
+*.local
+
+# env
+.env
+.env.local
+
+# editor
+.DS_Store
+.vscode/
+.idea/
+
+# logs
+*.log
+*.err
+npm-debug.log*
+pnpm-debug.log*
+
+# cache
+.cache/
+.turbo/
+
+# local test artifacts
+.playwright-cli/

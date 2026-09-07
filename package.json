@@ -1,0 +1,25 @@
+{
+  "name": "skyview-3d",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SkyView 3D - an immersive 3D HUD that shows the aircraft passing overhead, in real time.",
+  "type": "module",
+  "workspaces": ["shared", "server", "web"],
+  "scripts": {
+    "dev": "concurrently -n server,web -c green,cyan \"npm run dev:server\" \"npm run dev:web\"",
+    "dev:server": "npm --workspace @skyview/server run dev",
+    "dev:web": "npm --workspace @skyview/web run dev",
+    "build": "npm --workspace @skyview/web run build",
+    "start": "npm --workspace @skyview/server run start",
+    "typecheck": "npm --workspace @skyview/server run typecheck && npm --workspace @skyview/web run typecheck",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

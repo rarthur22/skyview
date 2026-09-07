@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base reset + HUD globals. */
+@layer base {
+  :root {
+    --hud-bg-primary: #0a0e27;
+    --hud-bg-secondary: #1a1f3a;
+    --hud-fg-primary: #00d4ff;
+    --hud-fg-secondary: #4a7c8c;
+    --hud-warn: #ff6b35;
+    --hud-success: #00ff00;
+    --hud-grid: rgba(0, 68, 17, 0.27);
+    --hud-glow: rgba(0, 212, 255, 0.35);
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    background: var(--hud-bg-primary);
+    color: var(--hud-fg-primary);
+    font-family: "JetBrains Mono", "OCR A", "Courier New", monospace;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+/* Global UI scaling (font-size multiplier). Chromium supports `zoom`; a mild
+ * transform fallback keeps it usable elsewhere. Applied on the HUD root. */
+.ui-sm { zoom: 0.82; }
+.ui-md { zoom: 1; }
+.ui-lg { zoom: 1.18; }
+
+@layer components {
+  .hud-panel {
+    background: linear-gradient(180deg, rgba(13, 18, 40, 0.88), rgba(10, 14, 39, 0.72));
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(0, 212, 255, 0.28);
+    border-radius: 10px;
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.45),
+      inset 0 0 24px rgba(0, 212, 255, 0.05),
+      0 0 14px rgba(0, 212, 255, 0.1);
+  }
+
+  .hud-panel-active {
+    border-color: var(--hud-fg-primary);
+  }
+
+  .hud-section-title {
+    @apply text-[11px] font-bold uppercase tracking-[0.15em] text-hud-fg-primary;
+  }
+
+  .hud-label {
+    @apply text-[10px] uppercase tracking-wider text-hud-fg-secondary;
+  }
+
+  .hud-value {
+    @apply text-sm text-hud-fg-primary;
+    text-shadow: 0 0 6px var(--hud-glow);
+  }
+
+  .hud-btn {
+    @apply inline-flex items-center justify-center gap-1 border px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider;
+    border-color: rgba(0, 212, 255, 0.4);
+    color: var(--hud-fg-primary);
+    background: transparent;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .hud-btn:hover,
+  .hud-btn-active {
+    background: rgba(0, 212, 255, 0.14);
+    box-shadow: 0 0 10px var(--hud-glow), inset 0 0 8px rgba(0, 212, 255, 0.2);
+  }
+
+  .hud-btn:active {
+    background: var(--hud-fg-primary);
+    color: #001f25;
+  }
+
+  .hud-btn-warn {
+    border-color: var(--hud-warn);
+    color: var(--hud-warn);
+  }
+
+  .hud-input {
+    @apply w-full border-b bg-transparent px-0 py-1.5 text-sm text-hud-fg-primary outline-none transition-colors;
+    border-color: rgba(0, 212, 255, 0.5);
+  }
+
+  .hud-input:focus {
+    border-color: var(--hud-fg-primary);
+    background: rgba(0, 212, 255, 0.08);
+    box-shadow: 0 1px 4px var(--hud-glow);
+  }
+
+  .italic-asterisk {
+    font-style: italic;
+  }
+}

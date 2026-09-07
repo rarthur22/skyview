@@ -1,0 +1,105 @@
+/* Left/right sidebar layout specifics. */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  border-top: 1px solid rgba(0, 212, 255, 0.25);
+}
+
+.sidebar-section .section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+  cursor: pointer;
+  user-select: none;
+}
+
+.sidebar-section .section-body {
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Flight list rows. */
+.flight-row {
+  padding: 6px 8px;
+  border-left: 2px solid transparent;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+.flight-row:hover {
+  background: rgba(0, 212, 255, 0.08);
+}
+.flight-row.selected {
+  border-left-color: var(--hud-fg-primary);
+  background: rgba(0, 212, 255, 0.15);
+}
+.flight-row .flight-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 12px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dotted rgba(0, 212, 255, 0.3);
+}
+
+/* Alert styling for flight rows. */
+.flight-row.alert-warning {
+  border-left-color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.1);
+}
+.flight-row.alert-caution {
+  border-left-color: #ffb347;
+  background: rgba(255, 179, 71, 0.07);
+}
+.flight-row.alert-warning:hover,
+.flight-row.alert-caution:hover {
+  background: rgba(255, 180, 180, 0.1);
+}
+.alert-badge {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+.alert-badge.alert-warning {
+  color: #ffd9d9;
+  background: rgba(255, 77, 77, 0.35);
+  border: 1px solid #ff4d4d;
+}
+.alert-badge.alert-caution {
+  color: #ffe8cc;
+  background: rgba(255, 179, 71, 0.3);
+  border: 1px solid #ffb347;
+}
+
+/* Checkbox-style toggles. */
+.hud-check {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--hud-fg-primary);
+  background: transparent;
+  flex-shrink: 0;
+  position: relative;
+  cursor: pointer;
+}
+.hud-check.checked {
+  background: rgba(0, 212, 255, 0.25);
+}
+.hud-check.checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--hud-fg-primary);
+}
