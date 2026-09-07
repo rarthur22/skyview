@@ -37,7 +37,7 @@ const ADSB_FI_URL = process.env.ADSB_FI_URL ?? "https://opendata.adsb.fi/api/v3/
 const POLL_MS = Number(process.env.POLL_MS ?? 8000);
 const SUPPLEMENT_API = (process.env.SUPPLEMENT_API ?? "0") !== "0";
 const API_POLL_MS = Number(process.env.API_POLL_MS ?? 8000);
-const GEOCODE_UA = process.env.GEOCODE_USER_AGENT ?? "skyview-3d/0.1 (https://github.com/skyview-3d)";
+const GEOCODE_UA = process.env.GEOCODE_USER_AGENT ?? "SkyView/1.0";
 const ALLOWED_HOSTS = (process.env.ALLOWED_HOSTS ?? "").split(",").map((s) => s.trim()).filter(Boolean);
 
 const serverDefaultConfig: Config = { ...DEFAULT_CONFIG, locationName: "Paris, France" };
